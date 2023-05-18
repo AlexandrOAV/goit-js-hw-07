@@ -1,7 +1,7 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
+
 const listEl = document.querySelector('.gallery');
 const addMarkup = creatingListPictures(galleryItems);
 function closeModalEscape(instance) {
@@ -35,9 +35,12 @@ function clickOnPicture(event) {
     }
     const instance  = basicLightbox.create(`<img
       src="${event.target.dataset.source}"
-    />`)
+    />`, {
+      onShow: () => {document.addEventListener("keydown", closeModalEscape)},
+      onClose: () => {document.removeEventListener("keydown", closeModalEscape)},
+    } )
     instance.show();
-    closeModalEscape(instance);
+
 }
 
 
